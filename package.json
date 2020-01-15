@@ -1,0 +1,33 @@
+{
+    "name": "mongoose-crud",
+    "version": "1.0.0",
+    "description": "mongoose-crud middleware for Express",
+    "main": "app.js",
+    "scripts": {
+        "test": "./node_modules/.bin/mocha test",
+        "lint": "./node_modules/.bin/eslint app.js lib.js --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jerrymannel/mongoose-crud.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jerrymannel/mongoose-crud/issues"
+    },
+    "homepage": "https://github.com/jerrymannel/mongoose-crud#readme",
+    "dependencies": {
+        "log4js": "^6.1.0",
+        "mongoose": "^5.8.7"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "eslint": "^6.8.0",
+        "express": "^4.17.1",
+        "husky": "^4.0.10",
+        "mocha": "^7.0.0",
+        "request": "^2.88.0",
+        "request-promise": "^4.2.5"
+    }
+}
