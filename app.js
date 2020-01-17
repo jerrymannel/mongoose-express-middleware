@@ -14,15 +14,15 @@ function MongooseModel(_model, _schema, _options) {
 	this.schema = _schema
 	this.model = mongoose.model(_model, this.schema, _options.collectionName)
 	let logger = _options.logger ? _options.logger : initLogger()
-	
-	Middleware.call(this, this.model, logger, _options.defaultFilter)
-	console.log(typeof this._filterParse)
-	console.log(typeof this._count)
 
-	this.count = this._count.bind(this)
+	Middleware.call(this, this.model, logger, _options.defaultFilter)
+
+	this.create = this._create.bind(this)
+	this.update = this._update.bind(this)
 	this.index = this._index.bind(this)
 	this.show = this._show.bind(this)
-	this.create = this._create.bind(this)
+	this.destroy = this._destroy.bind(this)
+	this.bulkDestroy = this._bulkDestroy.bind(this)
 }
 
 MongooseModel.prototype = {
@@ -30,5 +30,7 @@ MongooseModel.prototype = {
 	model: null,
 	schema: null
 }
+
+MongooseModel.prototype = Object.assign(Middleware.prototype, MongooseModel.prototype)
 
 module.exports = MongooseModel

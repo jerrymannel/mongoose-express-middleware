@@ -7,6 +7,7 @@ var MC = require("../")
 // var tests = require("./index.js")
 
 var definition = {
+	"_id": { "type": String },
 	"name": { "type": String },
 	"description": { "type": String },
 	"age" : {"type" : Number}
@@ -38,7 +39,12 @@ function init() {
 	var app = express()
 	app.use(express.json())
 
+	app.post("/foo", testCrud.create)
 	app.get("/foo", testCrud.index)
+	app.delete("/foo/bulkDelete", testCrud.bulkDestroy)
+	app.get("/foo/:id", testCrud.show)
+	app.put("/foo/:id", testCrud.update)
+	app.delete("/foo/:id", testCrud.destroy)
 
 	app.listen(port, (err) => {
     if (!err) {

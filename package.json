@@ -5,6 +5,7 @@
     "main": "app.js",
     "scripts": {
         "test": "./node_modules/.bin/mocha test",
+        "ft": "./node_modules/.bin/mocha functionalTest/test.js",
         "lint": "./node_modules/.bin/eslint app.js lib.js --fix"
     },
     "repository": {
@@ -18,6 +19,7 @@
     },
     "homepage": "https://github.com/jerrymannel/mongoose-crud#readme",
     "dependencies": {
+        "lodash": "^4.17.15",
         "log4js": "^6.1.0",
         "mongoose": "^5.8.7"
     },
@@ -27,7 +29,6 @@
         "express": "^4.17.1",
         "husky": "^4.0.10",
         "mocha": "^7.0.0",
-        "request": "^2.88.0",
-        "request-promise": "^4.2.5"
+        "supertest": "^4.0.2"
     }
 }
