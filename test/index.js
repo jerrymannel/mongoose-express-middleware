@@ -4,9 +4,6 @@ var chai = require("chai")
 var expect = chai.expect
 var Mongoose = require("mongoose")
 var MC = require("../")
-Mongoose.connect("mongodb://localhost:27017/mongoose-crudder-test", { useNewUrlParser: true,
-	useUnifiedTopology: true
-})
 
 var definition = {
 	"name": { "type": String },
@@ -26,17 +23,6 @@ var options = {
 var testCrud = new MC(modelName, schema, options)
 
 describe("Methods Sanity Check", function () {
-
-	after(() => {
-		Mongoose.connection.close()
-	})
-
-	describe("count", function () {
-		it("Should be a function", function (done) {
-			expect(testCrud.count).to.be.a("function")
-			done()
-		})
-	})
 
 	describe("index", function () {
 		it("Should be a function", function (done) {
@@ -80,13 +66,6 @@ describe("Methods Sanity Check", function () {
 		})
 	})
 
-	describe("bulkCreate", function () {
-		it("Should be a function", function (done) {
-			expect(testCrud.bulkCreate).to.be.a("function")
-			done()
-		})
-	})
-
 	describe("bulkUpdate", function () {
 		it("Should be a function", function (done) {
 			expect(testCrud.bulkUpdate).to.be.a("function")
@@ -94,9 +73,9 @@ describe("Methods Sanity Check", function () {
 		})
 	})
 
-	describe("bulkDelete", function () {
+	describe("bulkDestroy", function () {
 		it("Should be a function", function (done) {
-			expect(testCrud.bulkDelete).to.be.a("function")
+			expect(testCrud.bulkDestroy).to.be.a("function")
 			done()
 		})
 	})

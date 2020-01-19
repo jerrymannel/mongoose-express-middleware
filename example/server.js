@@ -41,6 +41,8 @@ function init() {
 
 	app.post("/foo", testCrud.create)
 	app.get("/foo", testCrud.index)
+	app.get("/foo/bulkShow", testCrud.bulkShow)
+	app.put("/foo/bulkUpdate", testCrud.bulkUpdate)
 	app.delete("/foo/bulkDelete", testCrud.bulkDestroy)
 	app.get("/foo/:id", testCrud.show)
 	app.put("/foo/:id", testCrud.update)

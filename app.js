@@ -22,6 +22,8 @@ function MongooseModel(_model, _schema, _options) {
 	this.index = this._index.bind(this)
 	this.show = this._show.bind(this)
 	this.destroy = this._destroy.bind(this)
+	this.bulkShow = this._bulkShow.bind(this)
+	this.bulkUpdate = this._bulkUpdate.bind(this)
 	this.bulkDestroy = this._bulkDestroy.bind(this)
 }
 
