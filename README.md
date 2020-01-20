@@ -22,7 +22,7 @@ var options = {
 	}
 }
 
-var fooCrud = new MongooseExpressMiddelware(modelName, schema, options)
+var fooCrud = new MongooseExpressMiddleware(modelName, schema, options)
 ```
 
 Add the middleware to express
@@ -50,7 +50,7 @@ app.listen(8080)
 
 # Constructor
 
-`var fooCrud = new MongooseExpressMiddelware(modelName, schema, options)`
+`var fooCrud = new MongooseExpressMiddleware(modelName, schema, options)`
 
 The constructor takes 3 values, 
 
@@ -65,18 +65,18 @@ The constructor takes 3 values,
 
 > All middlewares takes in two parameters. An express request object and an express response object
 
-## MongooseExpressMiddelware.create(`req`, `res`)
+## MongooseExpressMiddleware.create(`req`, `res`)
 
-## MongooseExpressMiddelware.update(`req`, `res`)
+## MongooseExpressMiddleware.update(`req`, `res`)
 
-## MongooseExpressMiddelware.index(`req`, `res`)
+## MongooseExpressMiddleware.index(`req`, `res`)
 
-## MongooseExpressMiddelware.show(`req`, `res`)
+## MongooseExpressMiddleware.show(`req`, `res`)
 
-## MongooseExpressMiddelware.destroy(`req`, `res`)
+## MongooseExpressMiddleware.destroy(`req`, `res`)
 
-## MongooseExpressMiddelware.bulkShow(`req`, `res`)
+## MongooseExpressMiddleware.bulkShow(`req`, `res`)
 
-## MongooseExpressMiddelware.bulkUpdate(`req`, `res`)
+## MongooseExpressMiddleware.bulkUpdate(`req`, `res`)
 
-## MongooseExpressMiddelware.bulkDestroy(`req`, `res`)
+## MongooseExpressMiddleware.bulkDestroy(`req`, `res`)

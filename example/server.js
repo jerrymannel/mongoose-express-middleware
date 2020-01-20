@@ -3,7 +3,7 @@ const express = require("express")
 const port = process.env.PORT || 8080
 
 var Mongoose = require("mongoose")
-var MongooseExpressMiddelware = require("../")
+var MongooseExpressMiddleware = require("../")
 
 var definition = {
     "_id": { "type": String },
@@ -21,7 +21,7 @@ var options = {
     }
 }
 
-var fooCrud = new MongooseExpressMiddelware(modelName, schema, options)
+var fooCrud = new MongooseExpressMiddleware(modelName, schema, options)
 
 Mongoose.connect("mongodb://localhost:27017/mongoose-express-middleware-test", {
     useNewUrlParser: true,
