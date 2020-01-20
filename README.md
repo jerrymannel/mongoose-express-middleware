@@ -1,6 +1,9 @@
 # mongoose-express-middleware
 Express CRUD middleware for mongoose
 
+[![Build Status](https://travis-ci.org/jerrymannel/mongoose-express-middleware.svg?branch=master)](https://travis-ci.org/jerrymannel/mongoose-express-middleware)
+[![Known Vulnerabilities](https://snyk.io/test/github/jerrymannel/mongoose-express-middleware/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jerrymannel/mongoose-express-middleware?targetFile=package.json)
+
 # Quick start
 
 Define your schema and create a new mongose-crud
