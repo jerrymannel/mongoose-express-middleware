@@ -3,7 +3,7 @@ const express = require("express")
 const port = process.env.PORT || 8080
 
 var Mongoose = require("mongoose")
-var MongooseCRUD = require("../")
+var MongooseExpressMiddelware = require("../")
 
 var definition = {
     "_id": { "type": String },
@@ -21,16 +21,16 @@ var options = {
     }
 }
 
-var fooCrud = new MongooseCRUD(modelName, schema, options)
+var fooCrud = new MongooseExpressMiddelware(modelName, schema, options)
 
-Mongoose.connect("mongodb://localhost:27017/mongoose-crudder-test", {
+Mongoose.connect("mongodb://localhost:27017/mongoose-express-middleware-test", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, err => {
     if (err) {
         console.error(err)
     } else {
-        console.log(`Connected to mongoose-crudder-testDB`)
+        console.log(`Connected to mongoose-express-middleware-test DB`)
         init()
     }
 })

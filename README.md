@@ -1,5 +1,5 @@
-# mongoose-crud
-CRUN middleware for mongoose
+# mongoose-express-middleware
+Express CRUD middleware for mongoose
 
 # Quick start
 
@@ -22,7 +22,7 @@ var options = {
 	}
 }
 
-var fooCrud = new MongooseCRUD(modelName, schema, options)
+var fooCrud = new MongooseExpressMiddelware(modelName, schema, options)
 ```
 
 Add the middleware to express
@@ -50,7 +50,7 @@ app.listen(8080)
 
 # Constructor
 
-`var fooCrud = new MongooseCRUD(modelName, schema, options)`
+`var fooCrud = new MongooseExpressMiddelware(modelName, schema, options)`
 
 The constructor takes 3 values, 
 
@@ -59,23 +59,24 @@ The constructor takes 3 values,
 * **options*(_Optional_): An optional options object. This has two properties.
 	* _collectionName_: [By default Mongoose uses the pluralized model name as the collection name](https://mongoosejs.com/docs/guide.html#collection). If you wish to override this, then provide your custom collection name here.
 	* _defaultFilter_: A default filter to be applied to all `GET` calls.
+	* _logger_: A logger object. By default this will use [log4js](https://www.npmjs.com/package/log4js)
 
 # Middlewares
 
 > All middlewares takes in two parameters. An express request object and an express response object
 
-## MongooseCRUD.create(`req`, `res`)
+## MongooseExpressMiddelware.create(`req`, `res`)
 
-## MongooseCRUD.update(`req`, `res`)
+## MongooseExpressMiddelware.update(`req`, `res`)
 
-## MongooseCRUD.index(`req`, `res`)
+## MongooseExpressMiddelware.index(`req`, `res`)
 
-## MongooseCRUD.show(`req`, `res`)
+## MongooseExpressMiddelware.show(`req`, `res`)
 
-## MongooseCRUD.destroy(`req`, `res`)
+## MongooseExpressMiddelware.destroy(`req`, `res`)
 
-## MongooseCRUD.bulkShow(`req`, `res`)
+## MongooseExpressMiddelware.bulkShow(`req`, `res`)
 
-## MongooseCRUD.bulkUpdate(`req`, `res`)
+## MongooseExpressMiddelware.bulkUpdate(`req`, `res`)
 
-## MongooseCRUD.bulkDestroy(`req`, `res`)
+## MongooseExpressMiddelware.bulkDestroy(`req`, `res`)
