@@ -59,3 +59,23 @@ The constructor takes 3 values,
 * **options*(_Optional_): An optional options object. This has two properties.
 	* _collectionName_: [By default Mongoose uses the pluralized model name as the collection name](https://mongoosejs.com/docs/guide.html#collection). If you wish to override this, then provide your custom collection name here.
 	* _defaultFilter_: A default filter to be applied to all `GET` calls.
+
+# Middlewares
+
+> All middlewares takes in two parameters. An express request object and an express response object
+
+## MongooseCRUD.create(`req`, `res`)
+
+## MongooseCRUD.update(`req`, `res`)
+
+## MongooseCRUD.index(`req`, `res`)
+
+## MongooseCRUD.show(`req`, `res`)
+
+## MongooseCRUD.destroy(`req`, `res`)
+
+## MongooseCRUD.bulkShow(`req`, `res`)
+
+## MongooseCRUD.bulkUpdate(`req`, `res`)
+
+## MongooseCRUD.bulkDestroy(`req`, `res`)
