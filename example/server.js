@@ -21,7 +21,12 @@ var options = {
     }
 }
 
-var fooCrud = new MongooseExpressMiddleware(modelName, schema, options)
+schema.pre("save", function(next){
+	if(!this._id) this._id = new Mongoose.Types.ObjectId();
+	next()
+})
+
+var fooCrud = new MongooseExpressMiddleware(modelName, schema, null)
 
 Mongoose.connect("mongodb://localhost:27017/mongoose-express-middleware-test", {
     useNewUrlParser: true,

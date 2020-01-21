@@ -1,5 +1,4 @@
 "use strict"
-const mongoose = require("mongoose")
 const _ = require("lodash")
 
 function Middleware(model, logger, defaultFilter) {
@@ -57,7 +56,7 @@ Middleware.prototype = {
 	},
 	GetFilter: function(_default, _filter){
 		let filter = _filter ? _filter : {}
-		this.logger.info(filter)
+		this.logger.debug(filter)
 		if (typeof filter === "string") {
 			try {
 				filter = JSON.parse(filter)
@@ -93,9 +92,6 @@ Middleware.prototype = {
 	_create: function(req, res) {
 		if(_.isArray(req.body)) {
 			let documents = req.body;
-			documents.forEach(_d => {
-				if(!_d._id) _d._id = new mongoose.Types.ObjectId();
-			})
 			let statusCode = 200
 			let count = documents.length
 			return Promise.all(documents.map(_d => {
@@ -113,7 +109,6 @@ Middleware.prototype = {
 		}
 		else {
 			let doc = req.body;
-			if(!doc._id) doc._id = new mongoose.Types.ObjectId();
 			return new this.model(doc).save()
 			.then(result => this.Okay(res, 200, result))
 			.catch(err => this.Error(res, err))

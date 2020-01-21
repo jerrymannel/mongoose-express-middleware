@@ -31,6 +31,11 @@ var options = {
 	}
 }
 
+schema.pre("save", function(next){
+	if(!this._id) this._id = new Mongoose.Types.ObjectId();
+	next()
+})
+
 var fooCrud = new MongooseExpressMiddleware(modelName, schema, options)
 ```
 

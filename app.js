@@ -12,10 +12,12 @@ function initLogger() {
 
 function MongooseModel(_model, _schema, _options) {
 	this.schema = _schema
-	this.model = mongoose.model(_model, this.schema, _options.collectionName)
-	let logger = _options.logger ? _options.logger : initLogger()
+	let collectionName = _options && _options.collectionName ? _options.collectionName : null
+	let defaultFilter = _options && _options.defaultFilter ? _options.defaultFilter : {}
+	this.model = mongoose.model(_model, this.schema, collectionName)
+	let logger = _options && _options.logger ? _options.logger : initLogger()
 
-	Middleware.call(this, this.model, logger, _options.defaultFilter)
+	Middleware.call(this, this.model, logger, defaultFilter)
 
 	this.create = this._create.bind(this)
 	this.update = this._update.bind(this)
