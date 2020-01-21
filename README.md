@@ -6,6 +6,12 @@ Express CRUD middleware for mongoose
 
 # Quickstart
 
+Install 
+
+```sh
+npm install mongoose-express-middleware
+```
+
 Define your schema and create a new mongoose-express-middleware
 
 ```js
