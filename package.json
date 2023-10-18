@@ -1,5 +1,5 @@
 {
-    "name": "@jerrymannel/mongoose-express-middleware",
+    "name": "mongoose-express-middleware",
     "version": "2.0.0",
     "description": "An opinionated mongoose middleware for Express",
     "main": "app.js",
