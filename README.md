@@ -45,31 +45,33 @@ Add the middleware to express
 var app = express()
 app.use(express.json())
 
-app.post("/foo", fooCrud.create)
-app.get("/foo", fooCrud.index)
-app.get("/foo/bulkShow", fooCrud.bulkShow)
-app.put("/foo/bulkUpdate", fooCrud.bulkUpdate)
-app.delete("/foo/bulkDelete", fooCrud.bulkDestroy)
-app.get("/foo/:id", fooCrud.show)
-app.put("/foo/:id", fooCrud.update)
-app.delete("/foo/:id", fooCrud.destroy)
+app.get('/', crud.find);
+app.get('/:id', crud.findById);
+app.get('/utils/count', crud.count);
+app.post('/', crud.create);
+app.put('/:id', crud.update);
+app.delete('/', crud.deleteMany);
+app.delete('/:id', crud.deleteById);
+app.post('/utils/aggregate', crud.aggregate);
 
 app.listen(8080)
 ```
 
 # Table of contents
 
-1. [Quickstart](#Quickstart)
-2. [Constructor](#Constructor)
-3. [Methods](#Methods)
-	* [create(`req`, `res`)](#MongooseExpressMiddleware.create(`req`,-`res`))
-	* [update(`req`, `res`)](#MongooseExpressMiddleware.update(`req`,-`res`))
-	* [index(`req`, `res`)](#MongooseExpressMiddleware.index(`req`,-`res`))
-	* [show(`req`, `res`)](#MongooseExpressMiddleware.show(`req`,-`res`))
-	* [destroy(`req`, `res`)](#MongooseExpressMiddleware.destroy(`req`,-`res`))
-	* [bulkShow(`req`, `res`)](#MongooseExpressMiddleware.bulkShow(`req`,-`res`))
-	* [bulkUpdate(`req`, `res`)](#MongooseExpressMiddleware.bulkUpdate(`req`,-`res`))
-	* [bulkDestroy(`req`, `res`)](#MongooseExpressMiddleware.bulkDestroy(`req`,-`res`))
+- [mongoose-express-middleware](#mongoose-express-middleware)
+- [Quickstart](#quickstart)
+- [Table of contents](#table-of-contents)
+- [Constructor](#constructor)
+- [Methods](#methods)
+	- [MongooseExpressMiddleware.create(`req`, `res`)](#mongooseexpressmiddlewarecreatereq-res)
+	- [MongooseExpressMiddleware.update(`req`, `res`)](#mongooseexpressmiddlewareupdatereq-res)
+	- [MongooseExpressMiddleware.index(`req`, `res`)](#mongooseexpressmiddlewareindexreq-res)
+	- [MongooseExpressMiddleware.show(`req`, `res`)](#mongooseexpressmiddlewareshowreq-res)
+	- [MongooseExpressMiddleware.destroy(`req`, `res`)](#mongooseexpressmiddlewaredestroyreq-res)
+	- [MongooseExpressMiddleware.bulkShow(`req`, `res`)](#mongooseexpressmiddlewarebulkshowreq-res)
+	- [MongooseExpressMiddleware.bulkUpdate(`req`, `res`)](#mongooseexpressmiddlewarebulkupdatereq-res)
+	- [MongooseExpressMiddleware.bulkDestroy(`req`, `res`)](#mongooseexpressmiddlewarebulkdestroyreq-res)
 
 
 # Constructor
