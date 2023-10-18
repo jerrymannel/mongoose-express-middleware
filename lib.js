@@ -1,50 +1,68 @@
-module.exports = {
-	_filterParse: (filterParsed) => {
-		var self = this
+"use strict"
+const _ = require("lodash");
+
+let lib = {
+	IsString: val => val && val.constructor.name === 'String',
+	IsArray: arg => arg && arg.constructor.name === 'Array',
+	IsObject: arg => arg && arg.constructor.name === 'Object',
+	CreateRegexp: function (str) {
+		if (str.charAt(0) === '/' && str.charAt(str.length - 1) === '/') {
+			var text = str.substr(1, str.length - 2).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+			return new RegExp(text, 'i');
+		} else {
+			return str;
+		}
+	},
+	ResolveArray: function (arr) {
+		for (var x = 0; x < arr.length; x++) {
+			if (this.IsObject(arr[x])) {
+				arr[x] = this.FilterParse(arr[x]);
+			} else if (this.IsArray(arr[x])) {
+				arr[x] = this.ResolveArray(arr[x]);
+			} else if (this.IsString(arr[x])) {
+				arr[x] = this.CreateRegexp(arr[x]);
+			}
+		}
+		return arr;
+	},
+	FilterParse: function (filterParsed) {
 		for (var key in filterParsed) {
-			if (self.IsString(filterParsed[key])) {
-				filterParsed[key] = self.CreateRegexp(filterParsed[key])
-			} else if (self.IsArray(filterParsed[key])) {
-				filterParsed[key] = self.ResolveArray(filterParsed[key])
-			} else if (self.IsObject(filterParsed[key])) {
-				filterParsed[key] = self.FilterParse(filterParsed[key])
+			if (this.IsString(filterParsed[key])) {
+				filterParsed[key] = this.CreateRegexp(filterParsed[key])
+			} else if (this.IsArray(filterParsed[key])) {
+				filterParsed[key] = this.ResolveArray(filterParsed[key])
+			} else if (this.IsObject(filterParsed[key])) {
+				filterParsed[key] = this.FilterParse(filterParsed[key])
 			}
 		}
 		return filterParsed
 	},
-	GetFilter: (_default, _filter) => {
-		let filter = _filter ? _filter : {}
-		if (typeof filter === "string") {
-			try {
-				filter = JSON.parse(filter)
-				filter = this._filterParse(filter)
-			} catch (err) {
-				console.log("Failed to parse filter :" + err)
-				filter = {}
-			}
-		}
-		for (let key in _default) filter[key] = _default[key]
-		return filter
-	},
-	GetSort: (_sort) => {
-		var sort = {}
-		_sort ? _sort.split(",").map(el => el.split("-").length > 1 ? sort[el.split("-")[1]] = -1 : sort[el.split("-")[0]] = 1) : null
-		return sort
-	},
-	Okay: (res, data) => {
-		res.status(200).json(data)
-	},
-	Error: (res, err) => {
-		if (err.errors) {
-			var errors = []
-			Object.keys(err.errors).forEach(el => errors.push(err.errors[el].message))
-			res.status(400).json({
-				message: errors
-			})
-		} else {
-			res.status(400).json({
-				message: [err.message]
-			})
-		}
-	},
 }
+
+lib.getFilter = function (_default, _filter) {
+	let defaultFilter = _default ? _default : {};
+	let filter = _filter ? _filter : {};
+	if (typeof filter === "string") {
+		try {
+			filter = JSON.parse(filter);
+			filter = this.FilterParse(filter);
+		} catch (err) {
+			filter = {};
+		}
+	}
+	return _.assign({}, defaultFilter, filter);
+};
+
+lib.getObject = function (_data) {
+	let data = _data ? _data : {}
+	if (typeof data === "string") {
+		try {
+			data = JSON.parse(data);
+		} catch (err) {
+			data = {};
+		}
+	}
+	return data;
+};
+
+module.exports = lib;

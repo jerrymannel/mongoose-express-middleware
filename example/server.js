@@ -2,8 +2,8 @@
 const express = require("express")
 const port = process.env.PORT || 8080
 
-var Mongoose = require("mongoose")
-var MongooseExpressMiddleware = require("../")
+var mongoose = require("mongoose")
+var mongooseCrud = require("../")
 
 var definition = {
     "_id": { "type": String },
@@ -12,46 +12,33 @@ var definition = {
     "age": { "type": Number }
 }
 
-var schema = Mongoose.Schema(definition)
+var schema = mongoose.Schema(definition)
 var modelName = "foobar"
 var options = {
-    collectionName: "foobar",
     defaultFilter: {
         "age": { "$gte": 10 }
     }
 }
 
-schema.pre("save", function(next){
-	if(!this._id) this._id = new Mongoose.Types.ObjectId();
-	next()
-})
-
-var fooCrud = new MongooseExpressMiddleware(modelName, schema, null)
-
-Mongoose.connect("mongodb://localhost:27017/mongoose-express-middleware-test", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, err => {
-    if (err) {
-        console.error(err)
-    } else {
-        console.log(`Connected to mongoose-express-middleware-test DB`)
-        init()
-    }
-})
+var fooCrud = new mongooseCrud(modelName, schema, null);
 
 function init() {
     var app = express()
     app.use(express.json())
 
-    app.post("/foo", fooCrud.create)
-    app.get("/foo", fooCrud.index)
-    app.get("/foo/bulkShow", fooCrud.bulkShow)
-    app.put("/foo/bulkUpdate", fooCrud.bulkUpdate)
-    app.delete("/foo/bulkDelete", fooCrud.bulkDestroy)
-    app.get("/foo/:id", fooCrud.show)
-    app.put("/foo/:id", fooCrud.update)
-    app.delete("/foo/:id", fooCrud.destroy)
+    app.use((req, res, next) => {
+        console.log(req.method, req.url)
+        next()
+    });
+
+    app.get("/", fooCrud.find)
+    app.get("/:id", fooCrud.findById)
+    app.get("/utils/count", fooCrud.count)
+    app.post("/", fooCrud.create)
+    app.put("/:id", fooCrud.update)
+    app.delete("/:id", fooCrud.deleteById)
+    app.delete("/utils/deleteMany", fooCrud.deleteMany)
+    app.post("/utils/aggregate", fooCrud.aggregate)
 
     app.listen(port, (err) => {
         if (!err) {
@@ -60,3 +47,9 @@ function init() {
             console.error(err)
     })
 }
+
+(async () => {
+    await mongoose.connect("mongodb://localhost:30017/foobar");
+    console.log("Connected to mongodb");
+    init();
+})();
