@@ -76,8 +76,6 @@ async function update(req, res) {
 		result = await this.model.updateOne(filter, doc, options);
 	}
 
-	console.log(result);
-
 	if (!options.upsert) {
 		if (result.matchedCount == 0) {
 			return res.status(404).json({ message: "Document not found" });
@@ -109,7 +107,6 @@ async function deleteMany(req, res) {
 	try {
 		if (!req.query.filter) return res.status(400).json({ message: "Missing filter" });
 		let filter = lib.getFilter(this.options.defaultFilter, req.query.filter);
-		console.log(filter);
 		await this.model.deleteMany(filter);
 		res.end()
 	} catch (e) {
@@ -141,6 +138,8 @@ function mongooseCrud(modelName, schema, options) {
 	this.deleteById = deleteById.bind(this);
 	this.deleteMany = deleteMany.bind(this);
 	this.aggregate = aggregate.bind(this);
+
+	this.getFilter = lib.getFilter.bind(this);
 }
 
 mongooseCrud.prototype = {
