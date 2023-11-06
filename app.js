@@ -21,7 +21,7 @@ async function find(req, res) {
 
 async function findById(req, res) {
 	try {
-		if (!req.params.id) return res.status(400).json({ message: "Missing id" });
+		if (!req.params.id || req.params.id != null) return res.status(400).json({ message: "Missing id" });
 		let filter = {
 			"_id": req.params.id
 		};
@@ -56,6 +56,7 @@ async function create(req, res) {
 };
 
 async function update(req, res) {
+	if (!req.params.id || req.params.id != null) return res.status(400).json({ message: "Missing id" });
 	if (!req.body || req.body == {}) return res.status(400).json({ message: "Missing payload" });
 
 	let filter = {
@@ -92,7 +93,7 @@ async function update(req, res) {
 
 async function deleteById(req, res) {
 	try {
-		if (!req.params.id) return res.status(400).json({ message: "Missing id" });
+		if (!req.params.id || req.params.id != null) return res.status(400).json({ message: "Missing id" });
 		let filter = {
 			"_id": req.params.id
 		}
