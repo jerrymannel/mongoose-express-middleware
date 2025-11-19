@@ -9,12 +9,15 @@ Express CRUD middleware for mongoose
 Install 
 
 ```sh
-npm install mongoose-express-middleware
+npm install mongoose-express-middleware mongoose
 ```
 
 Define your schema and create a new mongoose-express-middleware
 
 ```js
+const Mongoose = require("mongoose");
+const MongooseExpressMiddleware = require("mongoose-express-middleware");
+
 var definition = {
 	"_id": { "type": String },
 	"name": { "type": String },

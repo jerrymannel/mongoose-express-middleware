@@ -1,7 +1,8 @@
-import mongoose, { Model, Schema, FilterQuery } from "mongoose";
-import * as _ from "lodash";
+import mongoose from "mongoose";
+import type { Model, Schema, FilterQuery } from "mongoose";
+import _ from "lodash";
 import lib from "./lib";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 interface Options {
 	defaultFilter?: any;
