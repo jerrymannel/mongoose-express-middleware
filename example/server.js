@@ -49,7 +49,7 @@ function init() {
 }
 
 (async () => {
-    await mongoose.connect("mongodb://localhost:30017/foobar");
+    await mongoose.connect("mongodb://localhost:27017/foobar");
     console.log("Connected to mongodb");
     init();
 })();
