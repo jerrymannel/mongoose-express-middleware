@@ -4,6 +4,7 @@
     "description": "An opinionated mongoose middleware for Express",
     "main": "dist/app.js",
     "types": "dist/app.d.ts",
+    "files": ["dist"],
     "scripts": {
         "build": "tsc",
         "test": "mocha -r ts-node/register test/**/*.ts"
