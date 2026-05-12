@@ -1,10 +1,12 @@
 {
     "name": "mongoose-express-middleware",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "An opinionated mongoose middleware for Express",
     "main": "dist/app.js",
     "types": "dist/app.d.ts",
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "build": "tsc",
         "test": "mocha -r ts-node/register test/**/*.ts"
