@@ -3,6 +3,7 @@
     "version": "3.0.0",
     "description": "An opinionated mongoose middleware for Express",
     "main": "dist/app.js",
+    "types": "dist/app.d.ts",
     "scripts": {
         "build": "tsc",
         "test": "mocha -r ts-node/register test/**/*.ts"

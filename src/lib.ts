@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-interface Filter {
+export interface Filter {
 	[key: string]: any;
 }
 
