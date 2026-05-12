@@ -1,6 +1,6 @@
 {
     "name": "mongoose-express-middleware",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "An opinionated mongoose middleware for Express",
     "main": "dist/app.js",
     "types": "dist/app.d.ts",
